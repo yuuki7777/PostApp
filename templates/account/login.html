@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block main %}
+<div class="w-full h-full">
+    <div class="w-11/12 mx-auto mt-11">
+      <h2 class="text-center text-3xl py-11">ログイン</h2>
+      <form method="POST" novalidate>
+      {% csrf_token %}
+      <div class="w-10/12 mx-auto ">      
+        <div>
+          <label  class="ml-2" for="{{ form.username.id_for_label }}">ユーザー名</label>
+            {{form.username|add_class:'w-full rounded-md mb-3 ring-1'}}
+            {% for error in form.username.errors %}
+              <span class="text-red-400">{{ error }}</span>
+            {% endfor %}
+        </div>
+  
+        <div>
+          <label class="ml-2" for="{{ form.password.id_for_label }}">パスワード</label>
+          {{ form.password|add_class:'w-full rounded-md mb-3 ring-1' }}
+            {% for error in form.password.errors %}
+              <span class="text-red-400">{{ error }}</span>
+            {% endfor %}
+        </div>
+      </div>
+  
+      <div class=" w-10/12 mx-auto mt-8">
+      <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit" value="login" class="w-full h-14  bg-emerald-500 rounded-md text-white text-xl">ログイン</button>
+      </div>
+  
+    </form>
+    </div>
+  </div>
+{% endblock %}
